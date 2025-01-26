@@ -1,5 +1,10 @@
+import 'dart:developer';
+
+import 'package:assignment/screens/kyc_page.dart';
+import 'package:assignment/screens/products_screen.dart';
 import 'package:assignment/service/http_service.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gap/gap.dart';
@@ -130,7 +135,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       textAlign: TextAlign.center,
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          CupertinoPageRoute(
+                            builder: (builder) => KycPage(),
+                          ),
+                        );
+                      },
                       child: Text(
                         'Click Here',
                         style: TextStyle(
@@ -151,13 +162,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: List.generate(
                     4,
                     (i) {
-                      return Column(
-                        children: [
-                          Image.network(
-                            homeScreenData['data']['category'][i]['icon'],
-                          ),
-                          Text(homeScreenData['data']['category'][i]['label'])
-                        ],
+                      return InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            CupertinoPageRoute(
+                              builder: (builder) => ProductsScreen(),
+                            ),
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            Image.network(
+                              homeScreenData['data']['category'][i]['icon'],
+                            ),
+                            Text(homeScreenData['data']['category'][i]['label'])
+                          ],
+                        ),
                       );
                     },
                   ),
